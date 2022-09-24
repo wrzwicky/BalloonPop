@@ -28,6 +28,8 @@ public class PopBalloon : MonoBehaviour
     public float bumpGain = 1f;
     [Tooltip("Health of new balloon.")]
     public int startHP = 2;
+    [Tooltip("How hard to punt balloon when poked.")]
+    public float pokeForce = 20f;
 
     private Collider m_Collider;
     private Rigidbody2D m_RB;
@@ -78,11 +80,10 @@ public class PopBalloon : MonoBehaviour
         Pop(Camera.main.ScreenToWorldPoint(Input.mousePosition));
     }
 
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    Destroy(gameObject);
-    //}
-
+    void OnTouchDown(Vector2 position) {
+        Pop(position);
+    }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         int r = Random.Range(0, bumpSounds.Length);
@@ -92,7 +93,7 @@ public class PopBalloon : MonoBehaviour
 
     private void Pop(Vector3 pokePos)
     {
-        m_RB.AddForce((transform.position - pokePos) * 30f, ForceMode2D.Impulse);
+        m_RB.AddForce((transform.position - pokePos) * pokeForce, ForceMode2D.Impulse);
 
         if (--hp > 0)
         {

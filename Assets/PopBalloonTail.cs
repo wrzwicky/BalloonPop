@@ -10,7 +10,7 @@ public class PopBalloonTail : MonoBehaviour
     // Main RB we need to update
     private Rigidbody2D m_rb;
     // Lerping to transform.rotation oscillates badly
-    private float curAngle = float.NegativeInfinity;
+    //private float curAngle = float.NegativeInfinity;
 
     // Start is called before the first frame update
     void Start()
